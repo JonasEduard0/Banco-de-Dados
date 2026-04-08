@@ -1,0 +1,36 @@
+			Banco de Dados
+Modelagem Conceitual: Alto nível, usa Entidade-Relacionamento.
+Modelagem Lógica: Tabela, define PK e FK.
+
+		Modelo Entidade-Relacionamento
+Entidade: Qualquer objeto do mundo real que pode ser identificado. 
+ Forte: Possui chave própria; 
+ Fraca: não consegue existir sem outra entidade. Representada por retângulo.
+
+Relacionamento: Associação entre 2 entidades. Representada por losango.
+
+Relacionamento ternário: Relaciona 3 entidades ao mesmo tempo
+
+Auto-relacionamento: Quando a entidade se relaciona com ela mesma.
+
+Entidade associativa: Quando um relacionamento vira uma entidade. Losango com retângulo.
+
+Agregação: Quando você relaciona um relacionamento com outra entidade.
+
+Cardinalidade: Define quantidade de participação, existem: 1:1, 1:N, N:N.
+
+
+		Generalização e Especialização
+Forma de organizar entidades em hierarquia. 
+
+Generalização: Processo de subir, ex: Aluno -> Professor → Pessoa.
+
+Especialização: Processo de descer, ex: Pessoa → Aluno -> Professor.
+  Disjuntiva: Só pode pertencer a um, ex: Pessoa → Aluno OU Professor.
+  Sobreposta: Pode pertencer a vários, ex: Pessoa → Professor E Coordenador.
+
+	Chaves
+Primária(PK): 	 Identifica unicamente um registro.
+Estrangeira(FK): Referencia outra entidade.
+Chave Simples: 	 Um único atributo.
+Chave Composta:	 Mais de um atributo.
