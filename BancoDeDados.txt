@@ -1,36 +1,55 @@
 			Banco de Dados
 Modelagem Conceitual: Alto nível, usa Entidade-Relacionamento.
-Modelagem Lógica: Tabela, define PK e FK.
+Modelagem Lógica:     Tabela, define PK e FK.
+Modelagem Física:     Implementação no banco, MySQL.
 
-		Modelo Entidade-Relacionamento
+		Modelo Conceitual
 Entidade: Qualquer objeto do mundo real que pode ser identificado. 
  Forte: Possui chave própria; 
  Fraca: não consegue existir sem outra entidade. Representada por retângulo.
 
-Relacionamento: Associação entre 2 entidades. Representada por losango.
+Relacionamento: 	 Associação entre 2 entidades. Representada por losango.
 
 Relacionamento ternário: Relaciona 3 entidades ao mesmo tempo
 
-Auto-relacionamento: Quando a entidade se relaciona com ela mesma.
+Auto-relacionamento: 	 Quando a entidade se relaciona com ela mesma.
 
-Entidade associativa: Quando um relacionamento vira uma entidade. Losango com retângulo.
+Entidade associativa: 	 Quando um relacionamento vira uma entidade. Losango com retângulo.
 
-Agregação: Quando você relaciona um relacionamento com outra entidade.
+Agregação: 		 Quando você relaciona um relacionamento com outra entidade.
 
-Cardinalidade: Define quantidade de participação, existem: 1:1, 1:N, N:N.
+Cardinalidade: 		 Define quantidade de participação, existem: 1:1, 1:N, N:N.
 
-
-		Generalização e Especialização
+	Generalização e Especialização
 Forma de organizar entidades em hierarquia. 
 
-Generalização: Processo de subir, ex: Aluno -> Professor → Pessoa.
-
+Generalização: 	Processo de subir, ex: Aluno -> Professor → Pessoa.
 Especialização: Processo de descer, ex: Pessoa → Aluno -> Professor.
-  Disjuntiva: Só pode pertencer a um, ex: Pessoa → Aluno OU Professor.
-  Sobreposta: Pode pertencer a vários, ex: Pessoa → Professor E Coordenador.
+Disjuntiva: 	Só pode pertencer a um, ex: Pessoa → Aluno OU Professor.
+Sobreposta: 	Pode pertencer a vários, ex: Pessoa → Professor E Coordenador.
 
 	Chaves
 Primária(PK): 	 Identifica unicamente um registro.
 Estrangeira(FK): Referencia outra entidade.
 Chave Simples: 	 Um único atributo.
 Chave Composta:	 Mais de um atributo.
+
+
+		Modelo Lógico
+Tabela: entidade.
+Coluna (atributo): característica.
+Primary Key(PK): identificador único.
+Foreign Key(FK): liga tabelas.
+
+	Normalização
+Processo para: evitar dados duplicados e inconsistência, organizar melhor as tabelas.
+
+1ª Forma Normal (1FN): Não pode ter atributos multivalorados, cada campo deve ter um único valor, não pode ter lista dentro de célula. Ex: Tabela Produto: | CLIENTES |   PRODUTOS	   |  X  ->  ✔  | CLIENTES | | PRODUTOS | 
+	       		       |   João   | Mouse, Teclado |  		 |  João   |  |  Mouse  |
+								      		      | Teclado |
+2ª Forma Normal (2FN): Deve estar na 1FN e todo atributo deve depender da chave inteira, não conter dependência funcional parcial. Basicamente separar em tabelas. Ex:
+Cliente: | id_cli | nome | telefone | cidade | estado | Produto: | id_prod | nome | preço |  Compra: | id_compra | id_cli |
+	 |    1   | João | 9999     |   RP   |   MG   |	   	 |     1   | João |  50   |	     |     1     |    1   |
+
+3ª Forma Normal (3FN): Precisa estar na 2FN, não pode haver dependência funcional transitiva. Uma informação não pode depender de outra. Ex: Tabela cliente não pode ter Estado, Estado depende de Cidade. Criar tabela Cidade:
+Tabelas Produto, Compra, Cliente,  Cidade: | id_cidade | nome | estado |
