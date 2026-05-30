@@ -28,28 +28,36 @@ Especialização: Processo de descer, ex: Pessoa → Aluno -> Professor.
 Disjuntiva: 	Só pode pertencer a um, ex: Pessoa → Aluno OU Professor.
 Sobreposta: 	Pode pertencer a vários, ex: Pessoa → Professor E Coordenador.
 
-	Chaves
-Primária(PK): 	 Identifica unicamente um registro.
-Estrangeira(FK): Referencia outra entidade.
-Chave Simples: 	 Um único atributo.
-Chave Composta:	 Mais de um atributo.
-
 
 		Modelo Lógico
-Tabela: entidade.
-Coluna (atributo): característica.
-Primary Key(PK): identificador único.
-Foreign Key(FK): liga tabelas.
+Chave Primária(PK)    | Atributo que identifica só um registro não nulo, não permitindo linhas repetidas. Ex: id_aluno.
+Chave Estrangeira(FK) | Referencia outra entidade, aponta á outra tabela. Uma PK sendo referenciada em outra tabela.
+Chave Simples 	      | Um único atributo identificador.
+Chave Composta	      | Mais de um atributo identificador, normalmente em tabelas intermediárias, sendo as 2 FK.
+
+Tabela | Entidade do Modelo Conceitual, tem atributos, linhas e chaves.
+Coluna | Cada coluna é um atributo, característica. Ex: Nome | Preço
+Linhas | Cada linha é um registro cadastrado.	    Ex: João | 12,50
+
+	Relacionamento
+1:1 | Um registro se liga com apenas um outro. Ex: Cada pessoa tem 1 CPF, cada CPF pertence a 1 pessoa.
+1:N | Um pode ter vários. Ex: 1 cliente pode fazer n pedidos, vários pedidos podem ser feitos por 1 cliente. FK fica no lado N.
+N:N | Muitos com muitos. Ñ dá pra colocar FK nas 2, então cria tabela intermediária com FK das 2. Ex: Um aluno faz vários cursos, 1 curso tem n alunos. Matricula com id_aluno(FK) e id_curso(FK).
+
+Dependência: Um atributo depende de outro. Ex: id_cliente → nome_cliente, pois sabendo id se sabe nome.
+Dependência parcial: Quando um atributo depende de outro, mas esse outro é PK composta. 
+Ex: nome_prod -> id_prod, mas id_prod faz parte de PK(id_prod,id_pedido).
+Dependência transitiva: Quando um atributo depende de outro atributo e não da chave. Ex: id_cliente → cidade → estado.
 
 	Normalização
-Processo para: evitar dados duplicados e inconsistência, organizar melhor as tabelas.
+Processo para evitar dados duplicados e inconsistentes, organizar melhor tabelas de modo q permita alterações sem danificar/quebrar.
 
-1ª Forma Normal (1FN): Não pode ter atributos multivalorados, cada campo deve ter um único valor, não pode ter lista dentro de célula. Ex: Tabela Produto: | CLIENTES |   PRODUTOS	   |  X  ->  ✔  | CLIENTES | | PRODUTOS | 
-	       		       |   João   | Mouse, Teclado |  		 |  João   |  |  Mouse  |
-								      		      | Teclado |
-2ª Forma Normal (2FN): Deve estar na 1FN e todo atributo deve depender da chave inteira, não conter dependência funcional parcial. Basicamente separar em tabelas. Ex:
+1ª Forma Normal (1FN): Quando ñ tem atributos q representam agrupamentos(compostos) e multivalorados. Cada campo deve ter um único valor, não pode ter lista dentro de célula. Ex: Tabela Produto: | CLIENTES |   PRODUTOS     |  X  ->  ✔  | CLIENTES | | PRODUTOS |
+	       		       				 |   João   | Mouse, Teclado |             |  João   |  |  Mouse  |
+								      		      			        | Teclado |
+2ª Forma Normal (2FN): Deve estar na 1FN e não conter dependência parcial. Criar tabela da dependência. Ex:
 Cliente: | id_cli | nome | telefone | cidade | estado | Produto: | id_prod | nome | preço |  Compra: | id_compra | id_cli |
 	 |    1   | João | 9999     |   RP   |   MG   |	   	 |     1   | João |  50   |	     |     1     |    1   |
 
-3ª Forma Normal (3FN): Precisa estar na 2FN, não pode haver dependência funcional transitiva. Uma informação não pode depender de outra. Ex: Tabela cliente não pode ter Estado, Estado depende de Cidade. Criar tabela Cidade:
+3ª Forma Normal (3FN): Precisa estar na 2FN, não pode haver dependência transitiva. Criar tabela para a dependência. Ex:
 Tabelas Produto, Compra, Cliente,  Cidade: | id_cidade | nome | estado |
