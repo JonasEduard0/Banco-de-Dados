@@ -16,8 +16,6 @@ Repositório destinado aos meus estudos sobre Banco de Dados, modelagem de dados
 - Dependências funcionais
 - Normalização até a 3ª Forma Normal (3FN)
 
-📄 [Acessar resumo de Modelagem]([./modelagem.txt](https://github.com/JonasEduard0/Banco-de-Dados/blob/main/Modelagem.txt))
-
 ### SQL e MySQL
 
 - Criação de bancos e tabelas
@@ -29,5 +27,3 @@ Repositório destinado aos meus estudos sobre Banco de Dados, modelagem de dados
 - JOINs
 - Views
 - Alteração e exclusão de tabelas
-
-📄 [Acessar resumo de SQL e MySQL]([./sql-mysql.txt](https://github.com/JonasEduard0/Banco-de-Dados/blob/main/Database%20MySQL.txt))
