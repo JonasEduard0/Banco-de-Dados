@@ -1,32 +1,7 @@
-			Banco de Dados
+				Banco de Dados
 Modelagem Conceitual: Alto nível, usa Entidade-Relacionamento.
 Modelagem Lógica:     Tabela, define PK e FK.
 Modelagem Física:     Implementação no banco, MySQL.
-
-		Modelo Conceitual
-Entidade: Qualquer objeto do mundo real que pode ser identificado. 
- Forte: Possui chave própria; 
- Fraca: não consegue existir sem outra entidade. Representada por retângulo.
-
-Relacionamento: 	 Associação entre 2 entidades. Representada por losango.
-
-Relacionamento ternário: Relaciona 3 entidades ao mesmo tempo
-
-Auto-relacionamento: 	 Quando a entidade se relaciona com ela mesma.
-
-Entidade associativa: 	 Quando um relacionamento vira uma entidade. Losango com retângulo.
-
-Agregação: 		 Quando você relaciona um relacionamento com outra entidade.
-
-Cardinalidade: 		 Define quantidade de participação, existem: 1:1, 1:N, N:N.
-
-	Generalização e Especialização
-Forma de organizar entidades em hierarquia. 
-
-Generalização: 	Processo de subir, ex: Aluno -> Professor → Pessoa.
-Especialização: Processo de descer, ex: Pessoa → Aluno -> Professor.
-Disjuntiva: 	Só pode pertencer a um, ex: Pessoa → Aluno OU Professor.
-Sobreposta: 	Pode pertencer a vários, ex: Pessoa → Professor E Coordenador.
 
 
 		Modelo Lógico
@@ -53,11 +28,50 @@ Dependência transitiva: Quando um atributo depende de outro atributo e não da 
 Processo para evitar dados duplicados e inconsistentes, organizar melhor tabelas de modo q permita alterações sem danificar/quebrar.
 
 1ª Forma Normal (1FN): Quando ñ tem atributos q representam agrupamentos(compostos) e multivalorados. Cada campo deve ter um único valor, não pode ter lista dentro de célula. Ex: Tabela Produto: | CLIENTES |   PRODUTOS     |  X  ->  ✔  | CLIENTES | | PRODUTOS |
-	       		       				 |   João   | Mouse, Teclado |             |  João   |  |  Mouse  |
-								      		      			        | Teclado |
+	            |   João   | Mouse, Teclado |           | João |  | Mouse | Teclado |
+
 2ª Forma Normal (2FN): Deve estar na 1FN e não conter dependência parcial. Criar tabela da dependência. Ex:
 Cliente: | id_cli | nome | telefone | cidade | estado | Produto: | id_prod | nome | preço |  Compra: | id_compra | id_cli |
 	 |    1   | João | 9999     |   RP   |   MG   |	   	 |     1   | João |  50   |	     |     1     |    1   |
 
 3ª Forma Normal (3FN): Precisa estar na 2FN, não pode haver dependência transitiva. Criar tabela para a dependência. Ex:
 Tabelas Produto, Compra, Cliente,  Cidade: | id_cidade | nome | estado |
+
+
+		Modelo Conceitual
+	Entidade-Relacionamento
+Entidade: Qualquer objeto do mundo real que pode ser identificado. 
+ Forte: Possui chave própria; 
+ Fraca: não consegue existir sem outra entidade. Representada por retângulo.
+
+Entidade associativa: Quando um relacionamento vira uma entidade. Losango com retângulo.
+Cardinalidade: Define quantidade de participação, existem: 1:1, 1:N, N:N.
+Relacionamento: Associação entre 2 entidades. Representada por losango.
+Agregação: Quando você relaciona um relacionamento com outra entidade.
+Auto-relacionamento: Quando a entidade se relaciona com ela mesma.
+Relacionamento ternário: Relaciona 3 entidades ao mesmo tempo
+
+
+		Entidade-Relacionamento Estendido
+Adiciona mecanismos ao MER tradicional para representar estruturas mais complexas.
+
+	Generalização e Especialização
+Forma de organizar entidades em hierarquia. 
+
+Generalização: 	Você percebe entidades com características comuns e cria uma mais genérica. Aluno e Professor → Pessoa.
+Especialização: Entidade mais genérica criando mais específicas. Pessoa → Aluno ou Professor; Professor e Aluno são Pessoa.
+
+	Restrições de especialização
+Restrição Disjunta (Disjoint): Não pode especializar em 2 entidades. Um Funcionário não pode ser Professor e Técnico simultaneamente. Professor XOR Técnico
+
+Restrição Sobreposta (Overlapping): Pode pertencer às duas subclasses.
+
+	Total x Parcial
+Total: Todo elemento da superclasse precisa obrigatoriamente pertencer a uma subclasse.
+Todo funcionário obrigatoriamente é professor ou técnico.
+
+Parcial: Elementos da superclasse não precisam obrigatoriamente pertencer a uma subclasse.
+Pessoa pode ser Aluno ou Funcionário, mas pode ser de fora como Visitante.
+
+	Categorização
+Uma categoria é formada pela união de entidades de tipos diferentes. Proprietário = Pessoa ∪ Empresa.
